@@ -3,8 +3,8 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
+
 ---
-![alt text](/assets/page_index1.png)
 
 **In a nutshell, WOLF-I aims at gaining a deeper understanding of the role of IBRs in the damping of inter-area oscillations and develop methods and tools to design POD controllers for new devices.**
 
