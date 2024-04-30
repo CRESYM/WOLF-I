@@ -21,6 +21,8 @@ baseurl: "/WOLF-I" #the subpath of your site, e.g. /blog
 url: "https://cresym.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  Alejandra-CB
+# Specify the name of a file to show as a masthead graphic at the top of each page, instead of a title, here:
+masthead: /favicon.ico
 
 # Build settings
 markdown: kramdown
