@@ -23,7 +23,7 @@ GEM
     commonmarker (0.23.10)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
-    dnsruby (1.72.0)
+    dnsruby (1.72.1)
       simpleidn (~> 0.2.1)
     drb (2.2.1)
     em-websocket (0.5.3)
@@ -39,7 +39,7 @@ GEM
       net-http
     ffi (1.16.3-x64-mingw-ucrt)
     forwardable-extended (2.6.0)
-    gemoji (4.1.0)
+    gemoji (3.0.1)
     github-pages (231)
       github-pages-health-check (= 1.18.2)
       jekyll (= 3.9.5)
@@ -156,7 +156,8 @@ GEM
       jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
       jekyll (>= 3.7, < 5.0)
-    jekyll-spaceship (0.5.3)
+    jekyll-spaceship (0.10.2)
+      gemoji (~> 3.0)
       jekyll (>= 3.6, < 5.0)
       nokogiri (~> 1.6)
       rainbow (~> 3.0)
@@ -251,7 +252,7 @@ GEM
     sawyer (0.9.2)
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
-    simpleidn (0.2.1)
+    simpleidn (0.2.2)
       unf (~> 0.1.4)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
@@ -276,7 +277,7 @@ DEPENDENCIES
   github-pages
   http_parser.rb (~> 0.6.0)
   jekyll-feed (~> 0.6)
-  jekyll-spaceship
+  jekyll-spaceship (~> 0.10.2)
   kramdown-parser-gfm
   minima (~> 2.0)
   tzinfo (>= 1, < 3)

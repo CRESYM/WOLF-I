@@ -5,20 +5,23 @@
 layout: home
 
 ---
-
 ```mermaid!
-graph TD
-  a[jekyll-spaceship]
-  click a "https://github.com/jeffreytse/jekyll-spaceship" "view on github"
+flowchart LR
+A(WOLF-I aims at gaining a deeper understanding of the role of IBRs in the damping of inter-area<br/>oscillations and develop methods and tools to design POD controllers for new devices.)
+style A fill:#28A3D8,stroke:#28A3D8,stroke-width:2px 
 ```
 
-**In a nutshell, WOLF-I aims at gaining a deeper understanding of the role of IBRs in the damping of inter-area oscillations and develop methods and tools to design POD controllers for new devices.**
 
-It is a PhD work, with two main tasks:
-
-- Conducting fundamental studies to assess the impact of IBRs on inter-area oscillation damping, by employing small-scale test cases.
-- Designing POD controllers of devices such as FACTS and HVDC links, building reduced-order models based on large-scale models.
-
-**Project members**
-
-WOLF-I is a PhD work supervised by Comillas and sponsored by RTE.
+```mermaid!
+flowchart LR
+A(Small-scale systems)
+B(Fundamental studies to assess the impact of IBRs)
+C(Large-scale systems)
+D(Designing POD controllers of devices such as FACTS and HVDC links)
+A --> B
+C --> D
+style A fill:#36AE48,stroke:#36AE48,stroke-width:2px
+style C fill:#36AE48,stroke:#36AE48,stroke-width:2px
+style B fill:#8EDC98,stroke:#8EDC98,stroke-width:2px
+style D fill:#8EDC98,stroke:#8EDC98,stroke-width:2px
+```
