@@ -5,6 +5,8 @@
   border-top: 5px solid $grey-color-dark;
   border-bottom: 1px solid $grey-color-light;
   min-height: $spacing-unit * 1.865;
+  display: flex;
+  align-items: center;
 
   // Positioning context for the mobile navigation icon
   position: relative;
@@ -12,13 +14,12 @@
 
 .site-masthead {
   display: block;
-  margin-left: 10%;
-  margin-right: auto;
-  float: left;
+  margin-left: 100%;
+  margin-right: 0%;
   padding-top: $spacing-unit / 2;
   padding-bottom: $spacing-unit / 2;
-  width: 46px;
-  height: 46px;
+  width: 100px;
+  height: 100px;
 }
 
 
@@ -29,6 +30,7 @@
   letter-spacing: -1px;
   margin-bottom: 0;
   float: left;
+  margin-right: 10%;
 
   &,
   &:visited {
