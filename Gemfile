@@ -20,7 +20,6 @@ gem "github-pages", group: :jekyll_plugins
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
-  gem "jekyll-spaceship", "~> 0.10.2"# Add jekyll-spaceship plugin
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -43,5 +42,4 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
 #I manually add this gem
 gem 'webrick'
-
 
