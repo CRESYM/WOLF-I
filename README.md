@@ -8,7 +8,7 @@ Stay tuned to this page for the latest updates on the WOLF-I project. We will be
 
 ### Getting Involved
 
-We welcome contributions from the community. If you are interested in contributing to the WOLF-I project, please see our [Contribution Guidelines](CONTRIBUTING.md) for more information.
+We welcome contributions from the community. If you are interested in contributing to the WOLF-I project, please see our [Contribution Guidelines](contributing.md) for more information.
 
 ### Contact Us
 
