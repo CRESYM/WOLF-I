@@ -39,8 +39,3 @@ Please follow the prerequisites to begin the project.
     - Testing     : Run any relevant tests to ensure your changes haven't introduced any regressions or errors.
 - Preparing for push:
     - Before pushing any updates, authentify yourself using `git config --global user.email *you@example.com*` and `git config --global user.name *Your name*`
-
-
-
-
-
