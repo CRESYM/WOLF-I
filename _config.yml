@@ -13,10 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Wide-area Oscillations of Low Frequency with presence of IBRs
+title: WOLF-I project
 email: alejandra.cedenilla-bote@cresym.eu
 description: >- # this means to ignore newlines until "baseurl:"
-  WOLF-I aims at gaining a deeper understanding of the role of IBRs in the damping of inter-area oscillations and develop methods and tools to design POD controllers for new devices.
+  Wide-area Oscillations of Low Frequency with presence of IBRs
 baseurl: "/WOLF-I" #the subpath of your site, e.g. /blog
 url: "https://cresym.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
@@ -27,6 +27,9 @@ markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+
+# Global assets links
+global_asset_link : /assets/WOLFI.png
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

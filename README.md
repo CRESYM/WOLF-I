@@ -1,6 +1,6 @@
 # WOLF-I: Wide-area Oscillations of Low Frequency in Presence of IBRs
 
-Welcome to the WOLF-I project repository. This project focuses on studying and analyzing the inter-area oscillations of low frequency that occur in the presence of Inverter-Based Resources (IBRs). Our goal is to understand the dynamics of these oscillations and develop strategies to mitigate their impact on power systems.
+Welcome to the WOLF-I project page. This project focuses on studying and analyzing the role of IBRs in the damping of inter-area oscillations. Our goal is to understand the dynamics of these oscillations and develop strategies and tools to mitigate their impact on power systems.
 
 ## Project Updates
 

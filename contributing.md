@@ -1,6 +1,7 @@
 ---
-layout: base
+layout: page
 title: How to contribute?
+permalink: /contributing/
 ---
 
 # Contributing Guidelines for WOLF-I project
