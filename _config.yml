@@ -15,8 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: WOLF-I project
 email: alejandra.cedenilla-bote@cresym.eu
-description: >- # this means to ignore newlines until "baseurl:"
-  Wide-area Oscillations of Low Frequency with presence of IBRs
+description: Wide-area Oscillations of Low Frequency with presence of IBRs
 baseurl: "/WOLF-I" #the subpath of your site, e.g. /blog
 url: "https://cresym.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
