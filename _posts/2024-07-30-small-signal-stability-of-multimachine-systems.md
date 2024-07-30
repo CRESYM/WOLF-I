@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Small-Signal Stability of Multimachine Systems: A Step-by-Step Guide. Integrating Individual Dynamic Models into a Global Model "
+title:  "Small-Signal Stability of Multimachine Systems: A Step-by-Step Guide. Integrating Individual Dynamic Models into a Global Model."
 date:   2024-07-30 08:54:44 +0200
 categories: linearmodel
 ---
+{% include welcome_wolf-i.md %}
 
 *In the upcoming blog posts, I will detail the systematic procedure for constructing the linear model of an electrical system. This process follows the method proposed in ["Power System Stability and Control" by Prabha S. Kundur and Om P. Malik.](https://www.accessengineeringlibrary.com/content/book/9781260473544)*
 
