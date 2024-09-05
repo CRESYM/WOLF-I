@@ -40,7 +40,7 @@ $$t_v = {\frac{dR}{d \delta}}|_{\delta  = \delta_0}v_{IR0} =\begin{bmatrix}sin(\
 $$\Delta \dot{x}_i = A_i \Delta x_i + B_i \Delta v_{dq} \rightarrow \Delta \dot{x}_i = A_i \Delta x_i + B_i (t_v \Delta x + R \Delta v_{IR})$$ ; 
 $$\Delta i_{dq} = C_i \Delta x_i + D_i \Delta v_{dq} \rightarrow t_i \Delta x + R \Delta i_{IR} = C_i \Delta x_i + D_i (t_v \Delta x + R \Delta v_{IR})$$
 
-$$A = A_i - B_i t_v$$
+$$A = A_i + B_i t_v$$
 
 $$B = B_i R$$
 
