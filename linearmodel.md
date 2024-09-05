@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "linearmodel"
-tag: Linear Models
+title: "Linear Models"
+tag: linearmodel
 permalink: /linearmodel/
 ---

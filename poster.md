@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "poster"
-tag: Posters
+title: "Posters"
+tag: poster
 permalink: /poster/
 ---
