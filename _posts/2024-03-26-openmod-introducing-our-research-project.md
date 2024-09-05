@@ -2,7 +2,7 @@
 layout: post
 title:  "Openmod : Introducing our research project!"
 date:   2024-03-26 08:54:44 +0200
-categories: poster
+tag: poster
 ---
 {% include welcome_wolf-i.md %}
 

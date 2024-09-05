@@ -2,7 +2,7 @@
 layout: post
 title:  "Small-Signal Stability of Multimachine Systems: A Step-by-Step Guide. Integrating Individual Dynamic Models into a Global Model."
 date:   2024-07-30 08:54:44 +0200
-categories: linearmodel
+tag: linearmodel
 ---
 {% include welcome_wolf-i.md %}
 

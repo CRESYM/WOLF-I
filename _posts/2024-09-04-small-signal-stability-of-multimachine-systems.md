@@ -2,7 +2,7 @@
 layout: post
 title:  "Small-Signal Stability of Multimachine Systems: A Step-by-Step Guide. Reference frame transformation."
 date:   2024-09-04 08:54:44 +0200
-categories: linearmodel
+tag: linearmodel
 ---
 {% include welcome_wolf-i.md %}
 

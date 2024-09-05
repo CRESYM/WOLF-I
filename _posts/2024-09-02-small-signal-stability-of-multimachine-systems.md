@@ -2,7 +2,7 @@
 layout: post
 title:  "Small-Signal Stability of Multimachine Systems: A Step-by-Step Guide. Generator represented by the classical model."
 date:   2024-09-02 08:54:44 +0200
-categories: linearmodel
+tag: linearmodel
 ---
 {% include welcome_wolf-i.md %}
 
@@ -35,7 +35,7 @@ $$\Delta v_q = \frac {\delta v_q}{\delta iq}|_{t=0} \Delta i_q + \frac {\delta v
 - Considering $$L_d = L_q \rightarrow \begin{bmatrix}\Delta v_{d} \\\Delta v_{q} \end{bmatrix} = \begin{bmatrix}-R_a && L\\\ -L && -R_a\end{bmatrix}\begin{bmatrix}\Delta i_{d} \\\Delta i_{q} \end{bmatrix}$$
 	- $$\rightarrow \begin{bmatrix}\Delta i_{d} \\\Delta i_{q} \end{bmatrix} = \begin{bmatrix}-R_a && L \\\ -L && -R_a\end{bmatrix}^{-1} \begin{bmatrix}\Delta v_{d} \\\Delta v_{q} \end{bmatrix}$$ &nbsp;
 	- Hence : 
-    
+
 $$C_i = - \begin{bmatrix}0 && 0\\\ 0 &&0\end{bmatrix}$$
 
 $$D_i = \begin{bmatrix}-R_a && L \\\ -L && -R_a\end{bmatrix}^{-1}$$

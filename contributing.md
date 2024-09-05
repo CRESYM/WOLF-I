@@ -30,7 +30,7 @@ Please follow the prerequisites to begin the project.
 
 ## Create a post <a id="create-a-post"></a>
 
-- Please use the following [model template](/pages/templates/modelTemplate) and [test case template](/pages/templates/testCaseTemplate) for your reference.
+- Please use the model template for [Minima Theme](https://github.com/jekyll/minima)
 
 - You can see the how your changes impact the website by running locally a static site generator such as Jekyll (for more information, see [testing-your-github-pages-site-locally-with-jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) )
 
