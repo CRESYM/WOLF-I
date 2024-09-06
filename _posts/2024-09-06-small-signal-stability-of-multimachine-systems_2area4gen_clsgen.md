@@ -42,7 +42,9 @@ The load flow solution provides the equilibrium point from which we will calcula
 To calculate the load flow, we first needed to define the static data of the network in the file `bs_2area4gen.m`.
 The function `solvelf_pm` is used to solve the load flow problem with the `PowerModels.jl` package ([documentation](https://lanl-ansi.github.io/PowerModels.jl/stable/)).
 
-
+```julia
+Sb, result, data = solvelf_pm("bs_2area4gen.m")
+```
 
 
 # Admittance matrix
