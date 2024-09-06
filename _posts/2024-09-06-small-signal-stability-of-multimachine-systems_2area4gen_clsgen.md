@@ -23,7 +23,7 @@ The script solves the load flow problem based on the [PowerModels.jl](https://la
 
 The script is divided into several parts: loading the required packages, solving the load flow problem, defining the linear models of generators and loads, creating the expanded admittance matrix, constructing the global matrices of the two-area Kundur system, and calculating the eigenvalues of the multimachine model. The script provides the eigenvalues of the multimachine model as the final output.
 
-## Setup and Package Loading
+# Setup and Package Loading
 We start by loading the necessary packages and modules:
 ```julia
 using LinearAlgebra
