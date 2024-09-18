@@ -11,12 +11,12 @@ tag: linearmodel
 <div style="display: flex; justify-content: center; align-items: center;">
 
   <div style="text-align: center; margin-right: 20px;">
-    <img src="/assets/mermaid-diagram-2024-09-05-132725.png" alt="Diagrama Mermaid" style="width: 700px;">
+    <img src="{{ site.baseurl }}/assets/mermaid-diagram-2024-09-05-132725.png" alt="Diagrama Mermaid" style="width: 700px;">
     <p><em>Building a multimachine linear system</em></p>
   </div>
 
   <div style="text-align: center;">
-    <img src="/assets/2024-07-30-reference-frame-transformation.png" alt="Transformación de marco de referencia" style="width: 500px;">
+    <img src="{{ site.baseurl }}/assets/2024-07-30-reference-frame-transformation.png" alt="Transformación de marco de referencia" style="width: 500px;">
     <p><em>Reference frame tranformation and associated angles between axes and variables</em></p>
   </div>
 
