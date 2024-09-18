@@ -10,5 +10,5 @@ Openmod took place on W13 2024, a very interesting workshop about open energy mo
 
 In this post, you will find the poster we presented about our project during the workshop. This poster serves as an introduction to our work and outlines the main goals of our research.
 
-![alt text](../../../../assets/poster_om.png)
+![alt text](/assets/poster_om.png)
 
