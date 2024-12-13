@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Small-Signal Stability of Multimachine Systems: Linear Model of Two-Area Four-Generator System."
-date:   2024-12-12 08:54:44 +0200
+date:   2024-12-13 08:54:44 +0200
 tag: linearmodel
 ---
 {% include welcome_wolf-i.md %}
