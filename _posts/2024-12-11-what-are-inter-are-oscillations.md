@@ -37,4 +37,4 @@ The animation further illustrates how the system behaves under three damping sce
 
 From an operational perspective, **positive damping** is the desired condition. It ensures that oscillations diminish over time, enabling operators to maintain a **predictable and controllable system**. In contrast, zero or negative damping jeopardizes stability and complicates system management.
 
-These oscillations represent an **exchange of energy** between different areas of the grid. In the example, the opposing phase of Germany indicates that it alternates between absorbing and supplying energy to the rest of the system, while France, Spain, and Turkey oscillate in sync, collectively exchanging energy with Germany. The amplitude differences highlight the varying levels of participation in this energy exchange. 
+These oscillations represent an **exchange of energy** between different areas of the grid. In the example, France, Spain, and Turkey oscillate in sync, collectively exchanging energy with Germany. The amplitude differences highlight the varying levels of participation in this energy exchange. 
