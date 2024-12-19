@@ -6,8 +6,6 @@ tag: Analysis
 ---
 {% include welcome_wolf-i.md %}
 
-*In the upcoming blog posts, I will detail the systematic procedure for constructing the linear model of an electrical system. This process follows the method proposed in ["Power System Stability and Control" by Prabha S. Kundur and Om P. Malik.](https://www.accessengineeringlibrary.com/content/book/9781260473544)*
-
 In Europe, inter-area oscillations are a resonance phenomenon that occurs between generating units in different regions of the European continental grid. These units oscillate at low frequencies (typically between 0.1 and 1 Hz), causing fluctuations in various electrical parameters, including active power, voltage, and frequency. 
 
 The most poorly damped inter-area mode in Europe is currently the East-Centre-West inter-area mode, where
@@ -21,7 +19,7 @@ In this context, the chosen measure to represent these oscillations is the **evo
 - **Germany (green)**  
 - **France (red)**  
 - **Spain (blue)**  
-- **Turkey (black)**  
+- **Turkey (black)** *(Note: blue and black lines overlap)*
 
 Each country's oscillation reflects its phase and amplitude relative to the others:  
 - **Germany** oscillates with the **maximum amplitude** and is in **opposite phase** to the other countries.  
