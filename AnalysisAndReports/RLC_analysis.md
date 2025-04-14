@@ -72,11 +72,22 @@ using ControlSystems
 using Plots
 # Compute eigenvalues
 p = poles(sys)
+```
+
+```
+2-element Vector{ComplexF64}:
+ -0.049999999999999996 + 31.622737073188336im
+ -0.049999999999999996 - 31.622737073188336im
+```
+
+
+
+```julia
 # Plot real and imaginary parts
 pzmap(sys)
 ```
 
-![](figures/RLC_analysis_3_1.png)
+![](figures/RLC_analysis_4_1.png)
 
 
 
@@ -87,4 +98,4 @@ The real part of the eigenvalues is negative, which suggests that the system is 
 $$\omega_n = \frac{1}{\sqrt{LC}} =\frac{1}{\sqrt{0.1*0.01}} = 31.62$$
 where $$R$$ is the resistance, $$L$$ is the inductance, and $$C$$ is the capacitance.
 
-The damping ratio $$\zeta$$ is given by: $$\zeta = \frac{R}{2\sqrt{L/C}}$$. In this case, the damping ratio is $$\zeta = \frac{1}{2\sqrt{0.1/0.01}} = 0.5$$.
+The damping ratio $$\zeta$$ is given by: $$\zeta = \frac{R}{2\sqrt{L/C}}$$. In this case, the damping ratio is $$\zeta = \frac{0.01}{2\sqrt{0.1/0.01}}$$.
