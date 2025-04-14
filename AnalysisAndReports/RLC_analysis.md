@@ -71,6 +71,7 @@ p = poles(sys)
 pzmap(sys)
 ```
 
+![](figures/RLC_analysis_3_1.png)
 
 
 

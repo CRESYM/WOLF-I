@@ -1,4 +1,5 @@
 using Weave
 
+pathjmd = joinpath(@__DIR__, "../AnalysisAndReports/RLC_analysis.jmd")
 # First execute the .jl script 
-weave("RLC_analysis.jmd", out_path="RLC_analysis.md", doctype="github")
+weave(pathjmd, out_path="../WOLF-I/AnalysisAndReports/", doctype="github")
