@@ -49,3 +49,14 @@ $on-laptop:        800px !default;
   "minima/layout",
   "minima/syntax-highlighting"
 ;
+
+// Figure captions / legends (e.g. text under an image).
+.legend,
+figcaption {
+  @include relative-font-size(0.8125);
+  color: $grey-color;
+  font-style: italic;
+  text-align: center;
+  line-height: 1.3;
+  margin-top: 8px;
+}
