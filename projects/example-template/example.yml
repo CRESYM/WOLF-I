@@ -1,0 +1,6 @@
+# Metadata for the rendered example page (flat key: value, no nesting).
+# Edit these; the render script turns them into the page's front matter.
+title: Example template
+summary: Minimal template showing the Weave-to-Jekyll example pipeline.
+# post: /2026/06/17/some-related-post.html   # optional: link to a diary post
+# post_title: My related post

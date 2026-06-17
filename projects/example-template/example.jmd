@@ -1,0 +1,28 @@
+# Example template
+
+This page is a **template**. To create a real example: copy this folder, rename
+it, replace the code and prose below with your analysis, fill in `example.yml`,
+then render it with
+
+```
+julia tools/render_example.jl <your-project-name>
+```
+
+Everything below is ordinary Markdown with fenced ` ```julia ` code blocks; Weave
+runs each block and inserts the real output beneath it.
+
+We build a tiny state matrix:
+
+```julia
+using LinearAlgebra
+
+A = [0.0  -1.0;
+     1.0   0.0]
+```
+
+Its eigenvalues are purely imaginary, so this system is a marginally stable
+oscillator — the kind of result you would then comment on:
+
+```julia
+eigvals(A)
+```

@@ -27,6 +27,12 @@ theme: minima
 plugins:
   - jekyll-feed
 
+# Worked, executable examples (rendered from projects/<name>/ with Weave.jl).
+collections:
+  examples:
+    output: true
+    permalink: /examples/:name/
+
 # Global assets links
 global_asset_link : /assets/WOLFI.png
 
