@@ -124,5 +124,11 @@ function render(arg)
     @info "Rendered example" source=jmd output=outfile slug=slug
 end
 
-length(ARGS) == 1 || error("Usage: julia tools/render_example.jl <path-to.jmd | project-name>")
-render(ARGS[1])
+# Auto-run only when executed as a script (julia tools/render_example.jl <arg>).
+# When included in the REPL this is skipped, so you can call render("…") directly:
+#   julia> include("tools/render_example.jl")
+#   julia> render("projects/<name>/<file>.jmd")
+if abspath(PROGRAM_FILE) == @__FILE__
+    length(ARGS) == 1 || error("Usage: julia tools/render_example.jl <path-to.jmd | project-name>")
+    render(ARGS[1])
+end

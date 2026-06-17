@@ -5,7 +5,7 @@ summary: "Minimal template showing the Weave-to-Jekyll example pipeline."
 project: https://github.com/CRESYM/WOLF-I/tree/main/projects/example-template
 project_name: projects/example-template
 generated: 2026-06-17
-commit: 2b5f5e3
+commit: 18c6d16
 ---
 
 This page is a **template**. To create a real example: copy this folder, rename
