@@ -2,12 +2,24 @@
 layout: default
 ---
 
-<h1>{{ page.tag }}</h1>
+<h1>{{ page.title | default: page.tag }}</h1>
 
-<ul>
-  {% for post in site.tags[page.tag] %}
-    <li>
-      <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> - {{ post.date | date: "%B %d, %Y" }}
-    </li>
-  {% endfor %}
+{{ content }}
+
+{%- assign normtag = page.tag | downcase | strip -%}
+<ul class="post-list">
+  {%- for post in site.posts -%}
+    {%- assign posttags = post.tag | split: "," -%}
+    {%- assign show = false -%}
+    {%- for t in posttags -%}
+      {%- assign tt = t | downcase | strip -%}
+      {%- if tt == normtag -%}{%- assign show = true -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if show -%}
+      <li>
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+        &mdash; {{ post.date | date: "%B %d, %Y" }}
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
 </ul>

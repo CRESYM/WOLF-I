@@ -1,5 +1,5 @@
 ---
-tag: "Analysis, Linear Models"
+tag: "analysis, linearmodel, projects"
 layout: "post"
 title: "RLC Circuit Analysis"
 date: "2025-04-14 08:54:44 +0200"
