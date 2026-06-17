@@ -1,0 +1,6 @@
+[deps]
+BlockDiagonals = "0a1fb500-61f7-11e9-3c65-f5ef3456f9f0"
+Nemo = "2edaba10-b0f1-5616-af89-8c11ac63239a"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+PowerModels = "c36e90e8-916a-50a6-bd94-075b64ef4655"
+Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
