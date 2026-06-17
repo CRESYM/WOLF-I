@@ -4,7 +4,6 @@ title:  "Multimachine Systems: Linear Model of Two-Area Four-Generator System (w
 date:   2024-12-13 08:54:44 +0200
 tag: linearmodel
 ---
-{% include welcome_wolf-i.md %}
 
 *This post follows the method proposed in ["Power System Stability and Control" by Prabha S. Kundur and Om P. Malik.](https://www.accessengineeringlibrary.com/content/book/9781260473544)*
 

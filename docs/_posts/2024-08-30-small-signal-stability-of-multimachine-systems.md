@@ -4,31 +4,57 @@ title:  "Linear model of static loads"
 date:   2024-08-30 08:54:44 +0200
 tag: linearmodel
 ---
-{% include welcome_wolf-i.md %}
 
 *This post follows the method proposed in ["Power System Stability and Control" by Prabha S. Kundur and Om P. Malik.](https://www.accessengineeringlibrary.com/content/book/9781260473544)*
 
 
-- Considering :
-	- Voltage : $$v = v_R + jv_I$$
-	- Current : $$i = i_R + ji_I$$
-	- Apparent power : $$s = vi^* = p + jq$$
-	- Admittance matrix : $$i = Yv$$
-- We are working with static loads, that means that no dynamic behaviour is associated with this loads. Hence, we are looking for integrating this elements in the admittance matrix of the systems. That means that we are looking for a representation in the form : $$\Delta i = Y_L \Delta v \rightarrow \begin{bmatrix}\Delta i_{I} \\ \Delta i_{R} \end{bmatrix}= \begin{bmatrix} G_{II} && B_{IR} \\ B_{RI} && G_{RR} \end{bmatrix} \begin{bmatrix}\Delta v_{I} \\\Delta v_{R} \end{bmatrix}$$
+Considering :
+- Voltage : $$v = v_R + jv_I$$
+- Current : $$i = i_R + ji_I$$
+- Apparent power : $$s = vi^* = p + jq$$
+- Admittance matrix : $$i = Yv$$
+
+We are working with static loads, that means that no dynamic behaviour is associated with this loads. Hence, we are looking for integrating this elements in the admittance matrix of the systems. That means that we are looking for a representation in the form : 
+
+$$\Delta i = Y_L \Delta v \rightarrow \begin{bmatrix}\Delta i_{I} \\ \Delta i_{R} \end{bmatrix}= \begin{bmatrix} G_{II} && B_{IR} \\ B_{RI} && G_{RR} \end{bmatrix} \begin{bmatrix}\Delta v_{I} \\\Delta v_{R} \end{bmatrix}$$
 
 # Constant impedance (linear) load
-- Conductance : $$G_L = \frac{P_{L0}}{V_0^2} = cte$$
-- Susceptance : $$B_L = - \frac{Q_{L0}}{V_0^2} = cte$$
-- Current : $$i_L = i_{LI} + ji_{LR} = Y_L v = (G_L + jB_L)(v_I +jv_R)$$
-	- Linearizing : $$\Delta i_L = G_L \Delta v_I + j B_L \Delta v_I + j G_L \Delta v_R - B_L \Delta v_R = \Delta i_I + j \Delta i_R$$
-	- In matrix form : $$\begin{bmatrix}\Delta i_{I} \\ \Delta i_{R} \end{bmatrix}= \begin{bmatrix} G_L && -B_L \\ B_L && G_L \end{bmatrix} \begin{bmatrix}\Delta v_{I} \\\Delta v_{R} \end{bmatrix}$$
+Conductance : 
+
+$$G_L = \frac{P_{L0}}{V_0^2} = cte$$
+
+Susceptance : 
+
+$$B_L = - \frac{Q_{L0}}{V_0^2} = cte$$
+
+Current : 
+
+$$i_L = i_{LI} + ji_{LR} = Y_L v = (G_L + jB_L)(v_I +jv_R)$$
+
+- Linearizing : 
+
+$$\Delta i_L = G_L \Delta v_I + j B_L \Delta v_I + j G_L \Delta v_R - B_L \Delta v_R = \Delta i_I + j \Delta i_R$$
+
+- In matrix form :
+
+ $$\begin{bmatrix}\Delta i_{I} \\ \Delta i_{R} \end{bmatrix}= \begin{bmatrix} G_L && -B_L \\ B_L && G_L \end{bmatrix} \begin{bmatrix}\Delta v_{I} \\\Delta v_{R} \end{bmatrix}$$
 
 # Nonlinear load
 Consider the loads whose voltage - dependent characteristics are expressed as :
-- Active and reactive power : $$P_L = P_{L0} (\frac{V}{V_0})^m$$ ; $$Q_L = Q_{L0} (\frac{V}{V_0})^n$$
-- Voltage : $$V = \sqrt{v_I^2 + v_R^2}$$
 
-Linearizing $$i_L$$ :  $$i_L = (\frac{S}{v})^* = \frac{P_L - jQ_L}{v_R - jv_I} = \frac{P_L - jQ_L}{v_R - jv_I} \frac{v_R+ jv_I}{v_R + jv_I} = \frac {P_L v_R +jP_Lv_I +v_IQ_L -j Q_Lv_R}{v_I^2 + v_R^2}$$
+- Active and reactive power : 
+
+$$P_L = P_{L0} (\frac{V}{V_0})^m$$
+
+$$Q_L = Q_{L0} (\frac{V}{V_0})^n$$
+
+- Voltage : 
+
+$$V = \sqrt{v_I^2 + v_R^2}$$
+
+Linearizing $$i_L$$ :  
+
+$$i_L = (\frac{S}{v})^* = \frac{P_L - jQ_L}{v_R - jv_I} = \frac{P_L - jQ_L}{v_R - jv_I} \frac{v_R+ jv_I}{v_R + jv_I} = \frac {P_L v_R +jP_Lv_I +v_IQ_L -j Q_Lv_R}{v_I^2 + v_R^2}$$
 
 $$i_R = \frac{P_Lv_R+Q_Lv_I}{V^2} \rightarrow \Delta i_R = \frac{\partial i_R}{\partial v_I}|_{t = 0} \Delta v_I +  \frac{\partial i_R}{\partial v_R}|_{t = 0} \Delta v_R$$
 

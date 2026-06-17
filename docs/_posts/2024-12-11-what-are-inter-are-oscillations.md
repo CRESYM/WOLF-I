@@ -4,7 +4,6 @@ title:  "What are inter-area oscillations and why are they important?"
 date:   2024-12-11 08:54:44 +0200
 tag: Analysis
 ---
-{% include welcome_wolf-i.md %}
 
 In Europe, inter-area oscillations are a resonance phenomenon that occurs between generating units in different regions of the European continental grid. These units oscillate at low frequencies (typically between 0.1 and 1 Hz), causing fluctuations in various electrical parameters, including active power, voltage, and frequency. 
 
@@ -35,4 +34,4 @@ The animation further illustrates how the system behaves under three damping sce
 
 From an operational perspective, **positive damping** is the desired condition. It ensures that oscillations diminish over time, enabling operators to maintain a **predictable and controllable system**. In contrast, zero or negative damping jeopardizes stability and complicates system management.
 
-These oscillations represent an **exchange of energy** between different areas of the grid. In the example, France, Spain, and Turkey oscillate in sync, collectively exchanging energy with Germany. The amplitude differences highlight the varying levels of participation in this energy exchange. 
+These oscillations represent an **exchange of energy** between different areas of the grid. In the example, France, Spain, and Turkey oscillate in synchronism collectively exchanging energy with Germany. The amplitude differences highlight the varying levels of participation in this energy exchange. 
