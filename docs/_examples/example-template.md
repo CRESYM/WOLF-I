@@ -5,20 +5,21 @@ summary: "Minimal template showing the Weave-to-Jekyll example pipeline."
 project: https://github.com/CRESYM/WOLF-I/tree/main/projects/example-template
 project_name: projects/example-template
 generated: 2026-06-17
-commit: 6aec7d6
+commit: 2b5f5e3
 ---
 
-
 This page is a **template**. To create a real example: copy this folder, rename
-it, replace the header and content below with your analysis, then render it with
+it, replace the content below with your analysis, add an entry for it in the
+`METADATA` table of `tools/render_example.jl`, then render it with
 
 ```
 julia tools/render_example.jl <your-project-name>
 ```
 
-The block between the `---` lines above is the page metadata (it never reaches
-Weave). Everything here is ordinary Markdown with fenced ` ```julia ` code
-blocks; Weave runs each block and inserts the real output beneath it.
+This file is pure content — no metadata header. The page title and summary come
+from the `METADATA` table in the render script. Everything here is ordinary
+Markdown with fenced ` ```julia ` code blocks; Weave runs each block and inserts
+the real output beneath it.
 
 We build a tiny state matrix:
 

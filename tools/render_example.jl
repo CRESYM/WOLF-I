@@ -14,19 +14,12 @@
 # /examples/<slug>/, where <slug> is the .jmd file name (or the project folder
 # name when the file is the generic example.jmd).
 #
-# Each .jmd starts with a small YAML header (between --- lines) holding the page
-# metadata, e.g.:
-#
-#   ---
-#   title: Two-Area Four-Generator System (classical model)
-#   summary: The simplest multimachine linear model.
-#   post: /2024/09/06/some-post.html      # optional related diary post
-#   post_title: My related post           # optional
-#   ---
-#
-# The code runs in the nearest enclosing project environment (the directory above
-# the .jmd that contains a Project.toml), so results are reproducible. Weave is a
-# build tool: install it once in your global environment with
+# Page metadata (title/summary/related post) is NOT kept in the .jmd — it lives
+# in the METADATA table below, keyed by slug. Add an entry per example; a missing
+# entry just falls back to defaults (title = slug, no summary). The code runs in
+# the nearest enclosing project environment (the directory above the .jmd that
+# contains a Project.toml), so results are reproducible. Weave is a build tool:
+# install it once in your global environment with
 #   julia -e 'using Pkg; Pkg.add("Weave")'
 
 using Pkg
@@ -34,6 +27,22 @@ using Weave
 using Dates
 
 const REPO = normpath(joinpath(@__DIR__, ".."))
+
+# Per-example page metadata, keyed by slug. Optional fields: summary, post, post_title.
+const METADATA = Dict{String,NamedTuple}(
+    "example-template" => (
+        title = "Example template",
+        summary = "Minimal template showing the Weave-to-Jekyll example pipeline.",
+    ),
+    "2area4gen_clsgen" => (
+        title = "Two-Area Four-Generator System (classical model)",
+        summary = "The simplest multimachine linear model, using the classical synchronous machine model.",
+    ),
+    "2area4gen_detgen" => (
+        title = "Two-Area Four-Generator System (detailed model)",
+        summary = "Multimachine linear model using the detailed synchronous machine model.",
+    ),
+)
 
 "Resolve the CLI argument to a .jmd path (explicit file or projects/<name>/example.jmd)."
 function resolve_jmd(arg)
@@ -54,33 +63,6 @@ function find_project_dir(start)
     end
 end
 
-"Split a leading `--- ... ---` YAML header off the document; return (header, body)."
-function split_header(text)
-    lines = split(text, '\n')
-    if !isempty(lines) && strip(lines[1]) == "---"
-        closing = findnext(l -> strip(l) == "---", lines, 2)
-        if closing !== nothing
-            return join(lines[2:closing-1], '\n'), join(lines[closing+1:end], '\n')
-        end
-    end
-    return "", text
-end
-
-"Parse a flat `key: value` block (no nesting). Lines starting with # are ignored."
-function parse_flat_yaml(header)
-    meta = Dict{String,String}()
-    for line in split(header, '\n')
-        s = strip(line)
-        (isempty(s) || startswith(s, "#")) && continue
-        idx = findfirst(==(':'), s)
-        idx === nothing && continue
-        key = strip(s[1:idx-1])
-        val = strip(strip(s[idx+1:end]), ['"'])
-        meta[String(key)] = String(val)
-    end
-    return meta
-end
-
 git_commit(repo) = try
     readchomp(`git -C $repo rev-parse --short HEAD`)
 catch
@@ -96,36 +78,26 @@ function render(arg)
 
     # Page slug: the .jmd file name, or the project folder name for example.jmd.
     base = first(splitext(basename(jmd)))
-    name = base == "example" ? basename(project_dir) : base
-
-    header, body = split_header(read(jmd, String))
-    meta = parse_flat_yaml(header)
+    slug = base == "example" ? basename(project_dir) : base
+    meta = get(METADATA, slug, NamedTuple())
 
     # Run the example in its project environment.
     Pkg.activate(project_dir)
     Pkg.instantiate()
 
-    # Weave only the body (Weave never sees the metadata header). Write the body
-    # to a temp file *next to the .jmd* and run from there, so relative paths
-    # (includes, data files) resolve exactly as the author intended.
-    tmpsrc = joinpath(jmd_dir, "_render_tmp.jmd")
+    # Weave the .jmd from its own directory so relative paths (includes, data
+    # files) resolve as the author intended; output goes to a temp dir.
     outdir = mktempdir()
-    weaved = ""
-    try
-        write(tmpsrc, body)
-        cd(jmd_dir) do
-            weave(tmpsrc; doctype = "github", out_path = outdir)
-        end
-        weaved = read(joinpath(outdir, "_render_tmp.md"), String)
-    finally
-        isfile(tmpsrc) && rm(tmpsrc)
+    cd(jmd_dir) do
+        weave(jmd; doctype = "github", out_path = outdir)
     end
+    weaved = read(joinpath(outdir, base * ".md"), String)
 
     relproj     = to_url(relpath(project_dir, REPO))
-    title       = get(meta, "title", name)
-    summary     = get(meta, "summary", "")
-    post        = get(meta, "post", "")
-    post_title  = get(meta, "post_title", "blog post")
+    title       = get(meta, :title, slug)
+    summary     = get(meta, :summary, "")
+    post        = get(meta, :post, "")
+    post_title  = get(meta, :post_title, "blog post")
     project_url = "https://github.com/CRESYM/WOLF-I/tree/main/$relproj"
 
     io = IOBuffer()
@@ -146,10 +118,10 @@ function render(arg)
     println(io)
     print(io, weaved)
 
-    outfile = joinpath(REPO, "docs", "_examples", name * ".md")
+    outfile = joinpath(REPO, "docs", "_examples", slug * ".md")
     mkpath(dirname(outfile))
     write(outfile, String(take!(io)))
-    @info "Rendered example" source=jmd output=outfile slug=name
+    @info "Rendered example" source=jmd output=outfile slug=slug
 end
 
 length(ARGS) == 1 || error("Usage: julia tools/render_example.jl <path-to.jmd | project-name>")

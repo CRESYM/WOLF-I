@@ -11,9 +11,8 @@ projects/<Project_Name>/
 ├── README.md          Purpose, requirements, how to run, related posts/publications
 ├── Project.toml       Julia dependencies for this project
 ├── Manifest.toml      Pinned versions (commit this — it is what makes the project reproducible)
-├── *.jmd              Weave source(s) for published example(s): a YAML header
-│                       (title, summary, related post) + prose + ```julia blocks.
-│                       Each .jmd renders to its own /examples/ page.
+├── *.jmd              Weave source(s) for published example(s): prose + ```julia
+│                       blocks. Each .jmd renders to its own /examples/ page.
 ├── src/               Reusable source code
 ├── scripts/           Entry-point scripts (e.g. run_simulation.jl)
 ├── models/            Modelica models (.mo) used by the project
@@ -63,6 +62,11 @@ page slug is the `.jmd` file name (or the project folder name when the file is
 the generic `example.jmd`), published at `/examples/<slug>/` and listed on the
 site's **Examples** index. Re-run it whenever the code changes (there is no CI;
 the page carries a "generated on … / commit …" stamp so staleness is visible).
+
+The page title and summary (and an optional related post) are **not** in the
+`.jmd` — set them in the `METADATA` table near the top of
+[`../tools/render_example.jl`](../tools/render_example.jl), keyed by slug. A
+missing entry just falls back to defaults (title = the slug, no summary).
 
 ## Documentation links
 
