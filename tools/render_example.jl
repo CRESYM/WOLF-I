@@ -1,14 +1,21 @@
 #!/usr/bin/env julia
 #
-# Render a project's Weave example into a Jekyll page under docs/_examples/.
+# Render a Weave example (.jmd) into a Jekyll page under docs/_examples/.
 #
 # Usage:
-#   julia tools/render_example.jl <project-name>
-# e.g.
-#   julia tools/render_example.jl example-template
+#   julia tools/render_example.jl <path-to.jmd>     # explicit file
+#   julia tools/render_example.jl <project-name>    # shortcut for projects/<name>/example.jmd
 #
-# The example lives in projects/<name>/example.jmd and starts with a small YAML
-# header (between --- lines) holding the page metadata, e.g.:
+# Examples:
+#   julia tools/render_example.jl example-template
+#   julia tools/render_example.jl projects/202505-Two-Area-Four-Gen-Linear-Model/2area4gen_clsgen.jmd
+#
+# A project may hold several .jmd files; each renders to its own page at
+# /examples/<slug>/, where <slug> is the .jmd file name (or the project folder
+# name when the file is the generic example.jmd).
+#
+# Each .jmd starts with a small YAML header (between --- lines) holding the page
+# metadata, e.g.:
 #
 #   ---
 #   title: Two-Area Four-Generator System (classical model)
@@ -17,11 +24,10 @@
 #   post_title: My related post           # optional
 #   ---
 #
-# The example's own code runs in projects/<name>/ using that project's
-# Project.toml/Manifest.toml, so results are reproducible. Weave itself is a
+# The code runs in the nearest enclosing project environment (the directory above
+# the .jmd that contains a Project.toml), so results are reproducible. Weave is a
 # build tool: install it once in your global environment with
 #   julia -e 'using Pkg; Pkg.add("Weave")'
-# Julia's stacked environments make it available while the project env is active.
 
 using Pkg
 using Weave
@@ -29,15 +35,32 @@ using Dates
 
 const REPO = normpath(joinpath(@__DIR__, ".."))
 
+"Resolve the CLI argument to a .jmd path (explicit file or projects/<name>/example.jmd)."
+function resolve_jmd(arg)
+    isfile(arg) && return abspath(arg)
+    cand = joinpath(REPO, "projects", arg, "example.jmd")
+    isfile(cand) && return cand
+    error("Could not find a .jmd for '$arg' (not a file, and no projects/$arg/example.jmd).")
+end
+
+"Walk up from `start` to the nearest directory containing a Project.toml; fallback to `start`."
+function find_project_dir(start)
+    d = start
+    while true
+        isfile(joinpath(d, "Project.toml")) && return d
+        parent = dirname(d)
+        parent == d && return start
+        d = parent
+    end
+end
+
 "Split a leading `--- ... ---` YAML header off the document; return (header, body)."
 function split_header(text)
     lines = split(text, '\n')
     if !isempty(lines) && strip(lines[1]) == "---"
         closing = findnext(l -> strip(l) == "---", lines, 2)
         if closing !== nothing
-            header = join(lines[2:closing-1], '\n')
-            body = join(lines[closing+1:end], '\n')
-            return header, body
+            return join(lines[2:closing-1], '\n'), join(lines[closing+1:end], '\n')
         end
     end
     return "", text
@@ -64,37 +87,46 @@ catch
     ""
 end
 
-function render(name)
-    project_dir = joinpath(REPO, "projects", name)
-    jmd = joinpath(project_dir, "example.jmd")
-    isfile(jmd) || error("No example.jmd found in $project_dir")
+to_url(p) = replace(p, '\\' => '/')
+
+function render(arg)
+    jmd = resolve_jmd(arg)
+    jmd_dir = dirname(jmd)
+    project_dir = find_project_dir(jmd_dir)
+
+    # Page slug: the .jmd file name, or the project folder name for example.jmd.
+    base = first(splitext(basename(jmd)))
+    name = base == "example" ? basename(project_dir) : base
 
     header, body = split_header(read(jmd, String))
     meta = parse_flat_yaml(header)
 
-    # Run the example in the project's own environment.
+    # Run the example in its project environment.
     Pkg.activate(project_dir)
     Pkg.instantiate()
 
     # Weave only the body (Weave never sees the metadata header). Write the body
-    # to a temp file *inside the project dir* so relative paths (includes, data
-    # files) resolve exactly as they do for the original example.jmd.
-    tmpsrc = joinpath(project_dir, "_render_tmp.jmd")
+    # to a temp file *next to the .jmd* and run from there, so relative paths
+    # (includes, data files) resolve exactly as the author intended.
+    tmpsrc = joinpath(jmd_dir, "_render_tmp.jmd")
     outdir = mktempdir()
     weaved = ""
     try
         write(tmpsrc, body)
-        weave(tmpsrc; doctype = "github", out_path = outdir)
+        cd(jmd_dir) do
+            weave(tmpsrc; doctype = "github", out_path = outdir)
+        end
         weaved = read(joinpath(outdir, "_render_tmp.md"), String)
     finally
         isfile(tmpsrc) && rm(tmpsrc)
     end
 
+    relproj     = to_url(relpath(project_dir, REPO))
     title       = get(meta, "title", name)
     summary     = get(meta, "summary", "")
     post        = get(meta, "post", "")
     post_title  = get(meta, "post_title", "blog post")
-    project_url = "https://github.com/CRESYM/WOLF-I/tree/main/projects/$name"
+    project_url = "https://github.com/CRESYM/WOLF-I/tree/main/$relproj"
 
     io = IOBuffer()
     println(io, "---")
@@ -102,7 +134,7 @@ function render(name)
     println(io, "title: \"", title, "\"")
     isempty(summary) || println(io, "summary: \"", summary, "\"")
     println(io, "project: ", project_url)
-    println(io, "project_name: projects/", name)
+    println(io, "project_name: ", relproj)
     if !isempty(post)
         println(io, "post: ", post)
         println(io, "post_title: \"", post_title, "\"")
@@ -117,8 +149,8 @@ function render(name)
     outfile = joinpath(REPO, "docs", "_examples", name * ".md")
     mkpath(dirname(outfile))
     write(outfile, String(take!(io)))
-    @info "Rendered example" source=jmd output=outfile
+    @info "Rendered example" source=jmd output=outfile slug=name
 end
 
-length(ARGS) == 1 || error("Usage: julia tools/render_example.jl <project-name>")
+length(ARGS) == 1 || error("Usage: julia tools/render_example.jl <path-to.jmd | project-name>")
 render(ARGS[1])

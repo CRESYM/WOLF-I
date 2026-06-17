@@ -11,8 +11,9 @@ projects/<Project_Name>/
 ├── README.md          Purpose, requirements, how to run, related posts/publications
 ├── Project.toml       Julia dependencies for this project
 ├── Manifest.toml      Pinned versions (commit this — it is what makes the project reproducible)
-├── example.jmd        Weave source for the published example: a YAML header
-│                       (title, summary, related post) followed by prose + ```julia blocks
+├── *.jmd              Weave source(s) for published example(s): a YAML header
+│                       (title, summary, related post) + prose + ```julia blocks.
+│                       Each .jmd renders to its own /examples/ page.
 ├── src/               Reusable source code
 ├── scripts/           Entry-point scripts (e.g. run_simulation.jl)
 ├── models/            Modelica models (.mo) used by the project
@@ -51,11 +52,15 @@ Render it locally (Weave runs the code in the project's own environment):
 # one-time, in your global Julia env:
 julia -e 'using Pkg; Pkg.add("Weave")'
 
-# render an example -> docs/_examples/<Project_Name>.md
+# render a specific example file:
+julia tools/render_example.jl projects/<Project_Name>/<file>.jmd
+# or, the shortcut for a project's example.jmd:
 julia tools/render_example.jl <Project_Name>
 ```
 
-This writes a page published at `/examples/<Project_Name>/`, listed on the
+A project may hold several `.jmd` files; **each renders to its own page**. The
+page slug is the `.jmd` file name (or the project folder name when the file is
+the generic `example.jmd`), published at `/examples/<slug>/` and listed on the
 site's **Examples** index. Re-run it whenever the code changes (there is no CI;
 the page carries a "generated on … / commit …" stamp so staleness is visible).
 
