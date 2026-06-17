@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "WOLF-I: Wide-area Oscillations of Low Frequency & IBRs"
+abstract: >-
+  Research software, power system models, and scientific reports studying the role
+  of inverter-based resources (IBRs) in the damping of inter-area oscillations.
+type: software
+authors:
+  - family-names: "Cedenilla Bote"
+    given-names: "Alejandra"
+    email: "alejandra.cedenilla-bote@cresym.eu"
+    affiliation: "CRESYM / IIT Comillas / RTE France"
+repository-code: "https://github.com/cresym/WOLF-I"
+url: "https://cresym.github.io/WOLF-I"
+license: MIT
+keywords:
+  - power systems
+  - small-signal stability
+  - inter-area oscillations
+  - inverter-based resources
+  - Modelica
+  - Julia
