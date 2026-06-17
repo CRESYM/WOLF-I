@@ -7,6 +7,16 @@
 # e.g.
 #   julia tools/render_example.jl example-template
 #
+# The example lives in projects/<name>/example.jmd and starts with a small YAML
+# header (between --- lines) holding the page metadata, e.g.:
+#
+#   ---
+#   title: Two-Area Four-Generator System (classical model)
+#   summary: The simplest multimachine linear model.
+#   post: /2024/09/06/some-post.html      # optional related diary post
+#   post_title: My related post           # optional
+#   ---
+#
 # The example's own code runs in projects/<name>/ using that project's
 # Project.toml/Manifest.toml, so results are reproducible. Weave itself is a
 # build tool: install it once in your global environment with
@@ -19,11 +29,24 @@ using Dates
 
 const REPO = normpath(joinpath(@__DIR__, ".."))
 
-"Parse a flat `key: value` metadata file (no nesting). Lines starting with # are ignored."
-function parse_meta(path)
+"Split a leading `--- ... ---` YAML header off the document; return (header, body)."
+function split_header(text)
+    lines = split(text, '\n')
+    if !isempty(lines) && strip(lines[1]) == "---"
+        closing = findnext(l -> strip(l) == "---", lines, 2)
+        if closing !== nothing
+            header = join(lines[2:closing-1], '\n')
+            body = join(lines[closing+1:end], '\n')
+            return header, body
+        end
+    end
+    return "", text
+end
+
+"Parse a flat `key: value` block (no nesting). Lines starting with # are ignored."
+function parse_flat_yaml(header)
     meta = Dict{String,String}()
-    isfile(path) || return meta
-    for line in eachline(path)
+    for line in split(header, '\n')
         s = strip(line)
         (isempty(s) || startswith(s, "#")) && continue
         idx = findfirst(==(':'), s)
@@ -45,16 +68,27 @@ function render(name)
     project_dir = joinpath(REPO, "projects", name)
     jmd = joinpath(project_dir, "example.jmd")
     isfile(jmd) || error("No example.jmd found in $project_dir")
-    meta = parse_meta(joinpath(project_dir, "example.yml"))
+
+    header, body = split_header(read(jmd, String))
+    meta = parse_flat_yaml(header)
 
     # Run the example in the project's own environment.
     Pkg.activate(project_dir)
     Pkg.instantiate()
 
-    # Weave to a temporary dir, then wrap with Jekyll front matter.
+    # Weave only the body (Weave never sees the metadata header). Write the body
+    # to a temp file *inside the project dir* so relative paths (includes, data
+    # files) resolve exactly as they do for the original example.jmd.
+    tmpsrc = joinpath(project_dir, "_render_tmp.jmd")
     outdir = mktempdir()
-    weave(jmd; doctype = "github", out_path = outdir)
-    weaved = read(joinpath(outdir, "example.md"), String)
+    weaved = ""
+    try
+        write(tmpsrc, body)
+        weave(tmpsrc; doctype = "github", out_path = outdir)
+        weaved = read(joinpath(outdir, "_render_tmp.md"), String)
+    finally
+        isfile(tmpsrc) && rm(tmpsrc)
+    end
 
     title       = get(meta, "title", name)
     summary     = get(meta, "summary", "")

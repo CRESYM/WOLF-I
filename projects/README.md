@@ -11,8 +11,8 @@ projects/<Project_Name>/
 ├── README.md          Purpose, requirements, how to run, related posts/publications
 ├── Project.toml       Julia dependencies for this project
 ├── Manifest.toml      Pinned versions (commit this — it is what makes the project reproducible)
-├── example.jmd        Weave source for the published example (prose + ```julia blocks)
-├── example.yml        Metadata for the published example (title, summary, related post)
+├── example.jmd        Weave source for the published example: a YAML header
+│                       (title, summary, related post) followed by prose + ```julia blocks
 ├── src/               Reusable source code
 ├── scripts/           Entry-point scripts (e.g. run_simulation.jl)
 ├── models/            Modelica models (.mo) used by the project
