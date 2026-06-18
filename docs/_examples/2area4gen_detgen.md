@@ -8,8 +8,6 @@ generated: 2026-06-18
 commit: 16e246e
 ---
 
-# Linear Model of Two-Area Four-Generator System. Detailed Model of Synchronous Generators. 
-
 **This script implements the multimachine model of the two-area four-generator Kundur system with four generators using the detailed state-space representation for the synchronous machines.** 
 
 The script solves the load flow problem based on the [PowerModels.jl](https://lanl-ansi.github.io/PowerModels.jl/dev/), constructs the linear models of the system and calculates the eigenvalues of the multimachine model. 

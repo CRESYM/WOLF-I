@@ -8,8 +8,6 @@ generated: 2026-06-18
 commit: 16e246e
 ---
 
-# Linear Model of Two-Area Four-Generator System. The simplest one. 
-
 **This script implements the multimachine model of the two-area four-generator Kundur system with four generators using the classical state-space representation for the synchronous machines.** 
 
 This is the simplest model we can find for the two-area four-generator system, as it uses a synchronous machine model with only two state variables.
