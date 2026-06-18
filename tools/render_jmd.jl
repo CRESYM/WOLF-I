@@ -86,6 +86,25 @@ function render(arg)
         isfile(weaved_md) && rm(weaved_md)
     end
 
+    # Relocate figures into the site. Weave writes them under `<jmd_dir>/figures/`
+    # and references them as `figures/<file>` relative to the page — but that
+    # path doesn't exist on the built site (docs/ is the Jekyll root). Copy each
+    # referenced figure into docs/assets/examples/<slug>/ and rewrite the image
+    # links to site-absolute URLs so Jekyll serves them.
+    assets_subdir = "assets/examples/$slug"
+    fig_refs = unique(m.captures[1] for m in eachmatch(r"\]\(figures/([^)]+)\)", weaved))
+    if !isempty(fig_refs)
+        assets_dir = joinpath(REPO, "docs", "assets", "examples", slug)
+        mkpath(assets_dir)
+        for f in fig_refs
+            src = joinpath(jmd_dir, "figures", f)
+            isfile(src) || error("Figure referenced by the page but not found: $src")
+            cp(src, joinpath(assets_dir, f); force = true)
+        end
+        weaved = replace(weaved, "](figures/" => "]({{ site.baseurl }}/$assets_subdir/")
+        @info "Copied figures into site assets" count=length(fig_refs) dest=assets_dir
+    end
+
     relproj     = to_url(relpath(project_dir, REPO))
     title       = get(meta, :title, slug)
     summary     = get(meta, :summary, "")
