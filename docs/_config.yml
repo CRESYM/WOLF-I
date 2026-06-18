@@ -36,6 +36,12 @@ collections:
 # Global assets links
 global_asset_link : /assets/WOLFI.png
 
+# Visitor counter (GoatCounter). Set this to your GoatCounter site code
+# (the subdomain you choose at https://www.goatcounter.com/signup).
+# Leave blank to disable. Only loads on the production site.
+goatcounter: wolf-i
+
+
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
