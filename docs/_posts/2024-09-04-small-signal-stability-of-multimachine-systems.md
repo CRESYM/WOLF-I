@@ -2,7 +2,7 @@
 layout: post
 title:  "Multimachine Systems: Reference frame transformation"
 date:   2024-09-04 08:54:44 +0200
-tag: linearmodel
+tag: insights
 ---
 
 *This post follows the method proposed in ["Power System Stability and Control" by Prabha S. Kundur and Om P. Malik.](https://www.accessengineeringlibrary.com/content/book/9781260473544)*

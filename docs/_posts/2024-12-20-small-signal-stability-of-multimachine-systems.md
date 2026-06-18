@@ -2,7 +2,7 @@
 layout: post
 title:  "Two-area Four-generator Kundur system"
 date:   2024-12-20 08:54:44 +0200
-tag: linearmodel
+tag: insights
 ---
 
 Two executable examples are available showing how to build a multimachine linear model and compute its eigenvalues, applied to Kundur's **two-area, four-generator** system. Each one gives a step-by-step explanation of the procedure — from solving the load flow to assembling the global matrices and calculating the eigenvalues. Both are generated directly from the code in [`projects/202505-Two-Area-Four-Gen-Linear-Model/`]({{ site.baseurl }}/examples/), so the results shown are produced by the code itself:

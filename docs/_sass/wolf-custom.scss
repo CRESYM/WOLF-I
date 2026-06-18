@@ -1,0 +1,110 @@
+/* ===================================================================
+   WOLF-I custom styles
+   =================================================================== */
+
+/* ---- Logo next to the site title (header) ---- */
+.site-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.site-title .site-logo {
+  height: 40px;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* ---- Home page welcome hero ---- */
+.wolf-hero {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding: 28px 32px;
+  margin: 24px 0 32px;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f7f9fc 0%, #eef2f8 100%);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+.wolf-hero__logo {
+  flex: 0 0 auto;
+}
+.wolf-hero__logo img {
+  width: 160px;
+  height: auto;
+  display: block;
+}
+.wolf-hero__body {
+  flex: 1 1 320px;
+}
+.wolf-hero__title {
+  margin: 0 0 14px;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.wolf-hero__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.wolf-hero__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.wolf-hero__list li:last-child {
+  margin-bottom: 0;
+}
+.wolf-hero__icon {
+  flex: 0 0 auto;
+  font-size: 1.15rem;
+}
+
+/* ---- Partners block inside the hero ---- */
+.wolf-hero__partners {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #dfe5ee;
+}
+.wolf-hero__partners-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+.wolf-hero__partners-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+.wolf-hero__partners-list li {
+  font-size: 0.92rem;
+}
+.wolf-hero__partners-list li a {
+  font-weight: 600;
+}
+.wolf-hero__partners-list li span {
+  color: #6a7685;
+}
+
+@media (max-width: 600px) {
+  .wolf-hero {
+    flex-direction: column;
+    text-align: left;
+    padding: 22px;
+  }
+  .wolf-hero__logo img {
+    width: 120px;
+  }
+  .wolf-hero__partners-list {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

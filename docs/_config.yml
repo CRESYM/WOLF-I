@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: WOLF-I project
+title: WOLF-I
 email: alejandra.cedenilla-bote@cresym.eu
-description: Wide-area Oscillations of Low Frequency in presence of IBRs
+description: Wide-area Oscillations of Low Frequency in the presence of IBRs
 baseurl: "/WOLF-I" #the subpath of your site, e.g. /blog
 url: "https://cresym.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 

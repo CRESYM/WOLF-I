@@ -2,7 +2,7 @@
 layout: post
 title:  "What are inter-area oscillations and why are they important?"
 date:   2024-12-11 08:54:44 +0200
-tag: Analysis
+tag: insights
 ---
 
 In Europe, inter-area oscillations are a resonance phenomenon that occurs between generating units in different regions of the European continental grid. These units oscillate at low frequencies (typically between 0.1 and 1 Hz), causing fluctuations in various electrical parameters, including active power, voltage, and frequency. 
