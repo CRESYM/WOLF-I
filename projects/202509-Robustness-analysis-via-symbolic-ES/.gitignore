@@ -1,0 +1,28 @@
+# Archived / obsolete code
+/old/
+
+# NOTE: Manifest.toml is intentionally committed. It pins the exact, known-good
+# package versions (Symbolics 6.58.0 / SymbolicUtils 3.32.0) the analysis runs
+# under; newer versions break it. Do not ignore it.
+
+# Result data (large binaries)
+*.jld2
+
+# Generated figures
+*.png
+*.svg
+*.eps
+*.emf
+*.fig
+*.pdf
+
+# Generated data exports
+*.csv
+
+# Notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Editor / OS
+.vscode/
+desktop.ini
