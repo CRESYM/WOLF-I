@@ -1,5 +1,7 @@
 # WOLF-I: Wide-area Oscillations of Low Frequency & IBRs
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20748964.svg)](https://doi.org/10.5281/zenodo.20748964)
+ 
 Research repository for the **WOLF-I** project, studying the role of inverter-based resources (IBRs) in the damping of inter-area oscillations in power systems. It combines reproducible scientific software and a public development diary.
 
 The repository acts as both:

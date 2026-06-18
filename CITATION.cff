@@ -5,6 +5,11 @@ abstract: >-
   Research software, power system models, and scientific reports studying the role
   of inverter-based resources (IBRs) in the damping of inter-area oscillations.
 type: software
+doi: "10.5281/zenodo.20748964"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20748964"
+    description: "Concept DOI for all versions of WOLF-I"
 authors:
   - family-names: "Cedenilla Bote"
     given-names: "Alejandra"
