@@ -1,4 +1,0 @@
-# Julia environment for this example. Add your scientific dependencies under
-# [deps] (e.g. PowerModels, BlockDiagonals). Commit Project.toml AND Manifest.toml.
-[deps]
-LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"

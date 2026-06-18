@@ -5,23 +5,16 @@ summary: "The simplest multimachine linear model, using the classical synchronou
 project: https://github.com/CRESYM/WOLF-I/tree/main/projects/202505-Two-Area-Four-Gen-Linear-Model
 project_name: projects/202505-Two-Area-Four-Gen-Linear-Model
 generated: 2026-06-18
-commit: 7d2556a
+commit: 16e246e
 ---
 
 # Linear Model of Two-Area Four-Generator System. The simplest one. 
 
-**Description: This script implements the multimachine model of the two-area Kundur system with four generators using the classical model state-space representation for the synchronous machines.** This is the simplest model we can find for the two-area four-generator system, as it uses a synchronous machine model with only two state variables.
+**This script implements the multimachine model of the two-area four-generator Kundur system with four generators using the classical state-space representation for the synchronous machines.** 
 
-The script solves the load flow problem based on the PowerModels.jl package, constructs the linear models of the system and calculates the eigenvalues of the multimachine model. All the scripts and functions used in this example are available in the [SSSinJulia repository](https://github.com/Alejandra-CB/SSSinJulia/tree/main/scr): 
-- ``bs_2area4gen.m``: Contains the static data of the network.
-- ``ssanalysis.jl``: Implements the functions to solve the load flow problem, create the expanded admittance matrix, and define the linear models of the generators and loads.
-    - ``solvelf_pm``: Solves the load flow problem using the PowerModels.jl package.
-    - ``ssmatrixclgen.jl``: Implements the classical generator model.
-    - ``ymatrix.jl``: Creates the expanded admittance matrix.
-    - ``ymatrixload.jl``: Implements the load model.
-    - ``IRframe.jl``: Transforms the linear model of the generators from the d-q rotating frame to the I-R frame.   
-- ``2area4generator_clsgen.jl``: This script.
+This is the simplest model we can find for the two-area four-generator system, as it uses a synchronous machine model with only two state variables.
 
+The script solves the load flow problem based on the [PowerModels.jl](https://lanl-ansi.github.io/PowerModels.jl/dev/), constructs the linear models of the system and calculates the eigenvalues of the multimachine model. 
 
 The script is divided into several parts: loading the required packages, solving the load flow problem, defining the linear models of generators and loads, creating the expanded admittance matrix, constructing the global matrices of the two-area Kundur system, and calculating the eigenvalues of the multimachine model. The script provides the eigenvalues of the multimachine model as the final output.
 
@@ -42,7 +35,7 @@ using .solvelf # Import the module solvelf.
 # Solving the load flow problem.
 The load flow solution provides the equilibrium point from which we will calculate linear models of the generators and loads.
 To calculate the load flow, we first needed to define the static data of the network in the file `bs_2area4gen.m`.
-The function `solvelf_pm` is used to solve the load flow problem with the `PowerModels.jl` package ([documentation](https://lanl-ansi.github.io/PowerModels.jl/stable/)).
+The function `solvelf_pm` is used to solve the load flow problem with [PowerModels.jl](https://lanl-ansi.github.io/PowerModels.jl/dev/).
 
 ```julia
 Sb, result, data = solvelf_pm("data/bs_2area4gen.m")
@@ -86,15 +79,18 @@ Y_ex = yexmatrix(data)
 
 
 # Linear model of loads
-We model the loads using constant current (m=1) and constant impedance (n=2) characteristics. The load admittance matrix is then added to the expanded admittance matrix. The load model is implemented in the `ymatrixload.jl` function, and the theoretical background is provided at [this link](https://cresym.github.io/WOLF-I/2024/08/30/small-signal-stability-of-multimachine-systems.html).
+We model the loads using constant current (m=1) and constant impedance (n=2) characteristics. The load admittance matrix is then added to the expanded admittance matrix. The load model is implemented in `ymatrixload.jl`.
 
 ```julia
 m = 1 # Constant current characteristic
 n = 2 # Constant impedance characteristic
+
 # Admittance matrix of the load 1 (at bus 7)
 Yl1 = ymatrixload(m,n,result["solution"]["bus"]["7"]["vm"],result["solution"]["bus"]["7"]["va"],data["load"]["1"]["pd"],data["load"]["1"]["qd"])
+
 # Admittance matrix of the load 2 (at bus 9)
 Yl2 = ymatrixload(m,n,result["solution"]["bus"]["9"]["vm"],result["solution"]["bus"]["9"]["va"],data["load"]["2"]["pd"],data["load"]["2"]["qd"])
+
 #Add the load admittance matrix to the expanded admittance matrix
 Y_ex[2*7-1:2*7, 2*7-1:2*7] += Yl1
 Y_ex[2*9-1:2*9, 2*9-1:2*9] += Yl2
@@ -130,8 +126,7 @@ Y_ex
 
 
 # Linear models of generators
-The classical generator model is implemented in the `ssmatrixclgen.jl` function. The theoretical background for this model is provided [here](https://cresym.github.io/WOLF-I/2024/09/02/small-signal-stability-of-multimachine-systems.html).
-Each generator's linear model is initially defined in its own d-q rotating frame. It is then transformed to the I-R frame, which is common to all generators. This transformation is handled by the `IRframe.jl` function. The theoretical background for this process can be found [here](https://cresym.github.io/WOLF-I/2024/09/04/small-signal-stability-of-multimachine-systems.html).
+The classical generator model is implemented in `ssmatrixclgen.jl`. Each generator's linear model is initially defined in its own d-q rotating frame. It is then transformed to the I-R frame, which is common to all generators. This transformation is handled by the `IRframe.jl` function.
 
 ```julia
 const H1 = 6.5 # Inertia constant of the generators 1 and 3
@@ -141,9 +136,13 @@ const f = 60 # Nominal frequency
 const Ra = 0.0025 # Armature resistance
 const Xd = 0.3  # Direct-axis synchronous reactance
 const Sbg = 900 # Base power of generators parameters in MVA
+
 A1, B1, C1, D1 = ssmatrixclgen(H1,KD,f,Ra,Xd,result["solution"]["bus"]["1"]["vm"],result["solution"]["bus"]["1"]["va"],result["solution"]["gen"]["1"]["pg"],result["solution"]["gen"]["1"]["qg"],Sb,Sbg)
+
 A2, B2, C2, D2 = ssmatrixclgen(H1,KD,f,Ra,Xd,result["solution"]["bus"]["2"]["vm"],result["solution"]["bus"]["2"]["va"],result["solution"]["gen"]["2"]["pg"],result["solution"]["gen"]["2"]["qg"],Sb,Sbg)
+
 A3, B3, C3, D3 = ssmatrixclgen(H2,KD,f,Ra,Xd,result["solution"]["bus"]["3"]["vm"],result["solution"]["bus"]["3"]["va"],result["solution"]["gen"]["3"]["pg"],result["solution"]["gen"]["3"]["qg"],Sb,Sbg)
+
 A4, B4, C4, D4 = ssmatrixclgen(H2,KD,f,Ra,Xd,result["solution"]["bus"]["4"]["vm"],result["solution"]["bus"]["4"]["va"],result["solution"]["gen"]["4"]["pg"],result["solution"]["gen"]["4"]["qg"],Sb,Sbg)
 
 println("Example of the matrices of the generator 1. In this order: A, B, C, D")
@@ -174,7 +173,7 @@ Example of the matrices of the generator 1. In this order: A, B, C, D
 
 
 # Golbal matrices of the two-area Kundur system
-Now we construct the global matrices for the entire system by combining the linear models of the generators with the expanded admittance matrix (that includes the linear model of loads). The theoretical background for this process can be found [here](https://cresym.github.io/WOLF-I/2024/07/30/small-signal-stability-of-multimachine-systems.html):
+We construct the global matrices for the entire system by combining the linear models of the generators with the expanded admittance matrix (that includes the linear model of loads):
 
 ```julia
 Ad = BlockDiagonal([A1, A2, A3, A4])
@@ -223,6 +222,7 @@ Multimachine A matrix:
 
 # Eigenvalues of the multimachine model
 We can analyze the system stability by calculating its eigenvalues:
+
 ```julia
 lambda = eigvals(A)
 l = round.(lambda,digits=2)
@@ -244,7 +244,7 @@ l = round.(lambda,digits=2)
 
 
 
-This completes our linear model of the two-area, four-generator system. The eigenvalues offer insights into the system's stability characteristics.
+This completes the linear model of the two-area, four-generator system. The eigenvalues offer insights into the system's stability characteristics.
 
 We can identify three distinct oscillatory modes.
 

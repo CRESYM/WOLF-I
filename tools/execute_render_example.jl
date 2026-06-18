@@ -1,4 +1,4 @@
-include("render_example.jl")     # loads the functions (no auto-run now)
+include("render_jmd.jl")     # loads the functions (no auto-run now)
 
 # first call: activates the project env, instantiates, loads PowerModels etc.
 # — slow once (10–20 min the first time), then cached for the session

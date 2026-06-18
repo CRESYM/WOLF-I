@@ -1,21 +1,18 @@
 #!/usr/bin/env julia
 #
-# Render a Weave example (.jmd) into a Jekyll page under docs/_examples/.
+# Render a Weave .jmd into a Jekyll example page under docs/_examples/.
 #
 # Usage:
-#   julia tools/render_example.jl <path-to.jmd>     # explicit file
-#   julia tools/render_example.jl <project-name>    # shortcut for projects/<name>/example.jmd
+#   julia tools/render_jmd.jl <path-to.jmd>
 #
-# Examples:
-#   julia tools/render_example.jl example-template
-#   julia tools/render_example.jl projects/202505-Two-Area-Four-Gen-Linear-Model/2area4gen_clsgen.jmd
+# Example:
+#   julia tools/render_jmd.jl projects/202505-Two-Area-Four-Gen-Linear-Model/2area4gen_clsgen.jmd
 #
 # A project may hold several .jmd files; each renders to its own page at
-# /examples/<slug>/, where <slug> is the .jmd file name (or the project folder
-# name when the file is the generic example.jmd).
+# /examples/<slug>/, where <slug> is the .jmd file name.
 #
 # Page metadata (title/summary/related post) is NOT kept in the .jmd — it lives
-# in the METADATA table below, keyed by slug. Add an entry per example; a missing
+# in the METADATA table below, keyed by slug. Add an entry per page; a missing
 # entry just falls back to defaults (title = slug, no summary). The code runs in
 # the nearest enclosing project environment (the directory above the .jmd that
 # contains a Project.toml), so results are reproducible. Weave is a build tool:
@@ -28,12 +25,8 @@ using Dates
 
 const REPO = normpath(joinpath(@__DIR__, ".."))
 
-# Per-example page metadata, keyed by slug. Optional fields: summary, post, post_title.
+# Per-page metadata, keyed by slug (the .jmd file name). Optional: summary, post, post_title.
 const METADATA = Dict{String,NamedTuple}(
-    "example-template" => (
-        title = "Example template",
-        summary = "Minimal template showing the Weave-to-Jekyll example pipeline.",
-    ),
     "2area4gen_clsgen" => (
         title = "Two-Area Four-Generator System (classical model)",
         summary = "The simplest multimachine linear model, using the classical synchronous machine model.",
@@ -44,12 +37,10 @@ const METADATA = Dict{String,NamedTuple}(
     ),
 )
 
-"Resolve the CLI argument to a .jmd path (explicit file or projects/<name>/example.jmd)."
+"Resolve the CLI argument to an absolute .jmd path."
 function resolve_jmd(arg)
     isfile(arg) && return abspath(arg)
-    cand = joinpath(REPO, "projects", arg, "example.jmd")
-    isfile(cand) && return cand
-    error("Could not find a .jmd for '$arg' (not a file, and no projects/$arg/example.jmd).")
+    error("Not a file: '$arg' — pass the path to a .jmd (e.g. projects/<name>/<file>.jmd).")
 end
 
 "Walk up from `start` to the nearest directory containing a Project.toml; fallback to `start`."
@@ -76,12 +67,10 @@ function render(arg)
     jmd_dir = dirname(jmd)
     project_dir = find_project_dir(jmd_dir)
 
-    # Page slug: the .jmd file name, or the project folder name for example.jmd.
-    base = first(splitext(basename(jmd)))
-    slug = base == "example" ? basename(project_dir) : base
+    slug = first(splitext(basename(jmd)))
     meta = get(METADATA, slug, NamedTuple())
 
-    # Run the example in its project environment.
+    # Run the .jmd in its project environment.
     Pkg.activate(project_dir)
     Pkg.instantiate()
 
@@ -89,7 +78,7 @@ function render(arg)
     # directory as the working directory — relative includes and data paths
     # (e.g. "data/bs_2area4gen.m") resolve as the author intended. Weave writes
     # the .md next to the .jmd; we read it and then remove it.
-    weaved_md = joinpath(jmd_dir, base * ".md")
+    weaved_md = joinpath(jmd_dir, slug * ".md")
     weaved = ""
     try
         weave(jmd; doctype = "github", out_path = :doc)
@@ -126,14 +115,14 @@ function render(arg)
     outfile = joinpath(REPO, "docs", "_examples", slug * ".md")
     mkpath(dirname(outfile))
     write(outfile, String(take!(io)))
-    @info "Rendered example" source=jmd output=outfile slug=slug
+    @info "Rendered example page" source=jmd output=outfile slug=slug
 end
 
-# Auto-run only when executed as a script (julia tools/render_example.jl <arg>).
+# Auto-run only when executed as a script (julia tools/render_jmd.jl <arg>).
 # When included in the REPL this is skipped, so you can call render("…") directly:
-#   julia> include("tools/render_example.jl")
+#   julia> include("tools/render_jmd.jl")
 #   julia> render("projects/<name>/<file>.jmd")
 if abspath(PROGRAM_FILE) == @__FILE__
-    length(ARGS) == 1 || error("Usage: julia tools/render_example.jl <path-to.jmd | project-name>")
+    length(ARGS) == 1 || error("Usage: julia tools/render_jmd.jl <path-to.jmd>")
     render(ARGS[1])
 end

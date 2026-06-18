@@ -20,8 +20,6 @@ projects/<Project_Name>/
 └── results/           Generated outputs (figures, matrices, reports)
 ```
 
-See [`example-template/`](example-template/) for a minimal, working starting point.
-
 ## Julia environment
 
 Each project carries its own environment. To set it up / reproduce:
@@ -41,9 +39,9 @@ Commit both `Project.toml` and `Manifest.toml`.
 
 ## Publishing an example
 
-A project's worked example is written once as `example.jmd` (Markdown prose with
-` ```julia ` code blocks) and rendered into a styled, **executable** page on the
-website. The results shown are produced by the code, so they cannot drift.
+A worked example is written as a `.jmd` file (Markdown prose with ` ```julia `
+code blocks) and rendered into a styled, **executable** page on the website. The
+results shown are produced by the code, so they cannot drift.
 
 Render it locally (Weave runs the code in the project's own environment):
 
@@ -51,22 +49,19 @@ Render it locally (Weave runs the code in the project's own environment):
 # one-time, in your global Julia env:
 julia -e 'using Pkg; Pkg.add("Weave")'
 
-# render a specific example file:
-julia tools/render_example.jl projects/<Project_Name>/<file>.jmd
-# or, the shortcut for a project's example.jmd:
-julia tools/render_example.jl <Project_Name>
+# render a .jmd file:
+julia tools/render_jmd.jl projects/<Project_Name>/<file>.jmd
 ```
 
 A project may hold several `.jmd` files; **each renders to its own page**. The
-page slug is the `.jmd` file name (or the project folder name when the file is
-the generic `example.jmd`), published at `/examples/<slug>/` and listed on the
-site's **Examples** index. Re-run it whenever the code changes (there is no CI;
-the page carries a "generated on … / commit …" stamp so staleness is visible).
+page slug is the `.jmd` file name, published at `/examples/<slug>/` and listed on
+the site's **Examples** index. Re-run it whenever the code changes (there is no
+CI; the page carries a "generated on … / commit …" stamp so staleness is visible).
 
 The page title and summary (and an optional related post) are **not** in the
 `.jmd` — set them in the `METADATA` table near the top of
-[`../tools/render_example.jl`](../tools/render_example.jl), keyed by slug. A
-missing entry just falls back to defaults (title = the slug, no summary).
+[`../tools/render_jmd.jl`](../tools/render_jmd.jl), keyed by slug. A missing
+entry just falls back to defaults (title = the slug, no summary).
 
 ## Documentation links
 
