@@ -1,24 +1,18 @@
 # Two-Area Four-Generator Linear Model
 
-Eigenvalue calculation of Kundur's classic **two-area, four-generator** power system, implemented in Julia.
+Eigenvalue calculation of Kundur's **two-area, four-generator** power system, implemented in Julia, following the method proposed in ["Power System Stability and Control" by Prabha S. Kundur and Om P. Malik.](https://www.accessengineeringlibrary.com/content/book/9781260473544). 
 
-Each generator and voltage-dependent load is represented by a small
-state-space model in its own *dq* frame, rotated into a common network (real /
-imaginary) frame and coupled through the expanded nodal admittance matrix. The
-multimachine system matrix is assembled as
+A detailed explanation of the procedure is also available on [WOLF-I project website.](https://cresym.github.io/WOLF-I/linearmodel/)
 
-```
-A = Ad + Bd · (Y_ex − Dd)⁻¹ · Cd
-```
+Each generator is represented by a small state-space model in its own *dq* frame, rotated into a common network (real / imaginary) frame and coupled through the expanded nodal admittance matrix. The multimachine system matrix is assembled as
 
-and its eigenvalues give the electromechanical modes of the system.
+$$ A = A_d + B_d · (Y_{ex} − D_d)^{-1} · C_d$$
 
 ## Requirements
 
 - Julia ≥ 1.10 (developed on 1.12)
 - Dependencies are pinned in `Project.toml` / `Manifest.toml`
-  (`PowerModels`, `BlockDiagonals`, `Plots`, and the
-  standard library `LinearAlgebra`).
+  (`PowerModels`, `BlockDiagonals`, and the standard library `LinearAlgebra`).
 
 Instantiate the exact environment from the repository root with:
 
@@ -43,8 +37,7 @@ Pkg.instantiate()
 │   └── linmodfun.jl         Reusable modules: load flow (solvelf), admittance
 │                            matrices (ymatrix), state-space models (ssmatrix)
 ├── scripts/                 Entry-point analysis scripts (see below)
-├── data/                    MATPOWER case files (network input data)
-└── results/                 Generated outputs (figures, matrices)
+└── data/                    MATPOWER case files (network input data)
 ```
 
 ### Scripts
@@ -59,7 +52,7 @@ Pkg.instantiate()
 | File | Description |
 |---|---|
 | `data/bs_2area4gen.m` | Kundur two-area, four-generator network (11 buses, MATPOWER format) |
-| `data/bs_3bus.m` | Reduced three-bus study network (MATPOWER format), kept for future three-bus studies |
+| `data/bs_3bus.m` | Reduced three-bus study network (MATPOWER format)|
 
 ## Citation
 
