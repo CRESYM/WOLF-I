@@ -1,13 +1,3 @@
----
-title: "Symbolic Eigenvalue Sensitivities — An Example"
-subtitle: "How robust is an inter-area mode to generator inertia?"
-author: "SymbolicES"
-date: 2026-06-18
-weave_options:
-  fig_ext: ".png"
-  out_path: "figures"
----
-
 # What this example shows
 
 This repository performs **small-signal stability analysis** of a two-machine power system, but with a twist: instead of plugging in numbers and computing eigenvalues, it keeps **one physical parameter symbolic** and derives a *closed-form expression* for each system eigenvalue and for its **sensitivity**.
