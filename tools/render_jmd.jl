@@ -27,9 +27,8 @@ const REPO = normpath(joinpath(@__DIR__, ".."))
 
 # Per-page metadata, keyed by slug (the .jmd file name). Optional: summary, post, post_title.
 const METADATA = Dict{String,NamedTuple}(
-    "2area4gen_clsgen" => (
-        title = "Two-Area Four-Generator System (classical model)",
-        summary = "The simplest multimachine linear model, using the classical synchronous machine model.",
+    "example" => (
+        title = "Symbolic Eigenvalue Sensitivities — An Example",
     ),
     "2area4gen_detgen" => (
         title = "Two-Area Four-Generator System (detailed model)",
