@@ -85,13 +85,18 @@ function render(arg)
     Pkg.activate(project_dir)
     Pkg.instantiate()
 
-    # Weave the .jmd from its own directory so relative paths (includes, data
-    # files) resolve as the author intended; output goes to a temp dir.
-    outdir = mktempdir()
-    cd(jmd_dir) do
-        weave(jmd; doctype = "github", out_path = outdir)
+    # Weave with out_path = :doc so Weave runs the code with the .jmd's own
+    # directory as the working directory — relative includes and data paths
+    # (e.g. "data/bs_2area4gen.m") resolve as the author intended. Weave writes
+    # the .md next to the .jmd; we read it and then remove it.
+    weaved_md = joinpath(jmd_dir, base * ".md")
+    weaved = ""
+    try
+        weave(jmd; doctype = "github", out_path = :doc)
+        weaved = read(weaved_md, String)
+    finally
+        isfile(weaved_md) && rm(weaved_md)
     end
-    weaved = read(joinpath(outdir, base * ".md"), String)
 
     relproj     = to_url(relpath(project_dir, REPO))
     title       = get(meta, :title, slug)

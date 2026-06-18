@@ -1,11 +1,12 @@
 ---
-layout: post
-title:  "Multimachine Systems: Linear Model of Two-Area Four-Generator System (with detailed model for generators)"
-date:   2024-12-13 08:54:44 +0200
-tag: linearmodel
+layout: example
+title: "Two-Area Four-Generator System (detailed model)"
+summary: "Multimachine linear model using the detailed synchronous machine model."
+project: https://github.com/CRESYM/WOLF-I/tree/main/projects/202505-Two-Area-Four-Gen-Linear-Model
+project_name: projects/202505-Two-Area-Four-Gen-Linear-Model
+generated: 2026-06-18
+commit: 7d2556a
 ---
-
-*This post follows the method proposed in ["Power System Stability and Control" by Prabha S. Kundur and Om P. Malik.](https://www.accessengineeringlibrary.com/content/book/9781260473544)*
 
 # Linear Model of Two-Area Four-Generator System. Detailed Model of Synchronous Generators. 
 
@@ -29,7 +30,7 @@ We start by loading the necessary packages and modules:
 ```julia
 using LinearAlgebra
 using BlockDiagonals
-include("sssanalysis.jl")
+include("src/linmodfun.jl")
 using .ssmatrix # Import the module ssmatrixclgen.
 using .ymatrix # Import the module ymatrix.
 using .solvelf # Import the module solvelf.
@@ -44,7 +45,7 @@ To calculate the load flow, we first needed to define the static data of the net
 The function `solvelf_pm` is used to solve the load flow problem with the `PowerModels.jl` package ([documentation](https://lanl-ansi.github.io/PowerModels.jl/stable/)).
 
 ```julia
-Sb, result, data = solvelf_pm("bs_2area4gen.m")
+Sb, result, data = solvelf_pm("data/bs_2area4gen.m")
 ```
 
 
@@ -138,14 +139,14 @@ A4, B4, C4, D4 = ssmatrixgen1d2q(H2,KD,f,Ra,Xd,Xq,Xl,Xdp,Xqp,Xdpp,Xqpp,Td0p,Tq0p
 ```
 
 ```
-([0.0 -0.34974590854237 … -0.025898409722745267 -0.20268320652583258; 376.9
-9111843077515 0.0 … 0.0 0.0; … ; 0.0 -1.5898411019477947 … -9.7754867370405
-77 7.347122430614078; 0.0 -20.77392373211786 … 12.26697330266973 -43.997600
-23997601], [0.35120799000742503 0.0034684291315465188; 0.0 0.0; … ; 1.80644
-55955738077 -1.152446053907153; 23.6042224488311 -15.058628437720145], [-0.
-0 0.3952184935555524 … 2.186547232309129 17.11210877459319; 0.0 39.03667106
-336945 … 3.280789416140824 25.675743256754284], [-0.3599640035996394 35.996
-400359964014; -35.996400359964 -0.359964003599643])
+([0.0 -0.3497459085423702 … -0.025898409722745305 -0.20268320652583288; 376
+.99111843077515 0.0 … 0.0 0.0; … ; 0.0 -1.589841101947797 … -9.775486737040
+577 7.347122430614078; 0.0 -20.773923732117893 … 12.26697330266973 -43.9976
+0023997601], [0.3512079900074252 0.003468429131546517; 0.0 0.0; … ; 1.80644
+55955738092 -1.1524460539071506; 23.604222448831123 -15.05862843772011], [-
+0.0 0.39521849355554356 … 2.1865472323091244 17.11210877459315; 0.0 39.0366
+71063369454 … 3.280789416140827 25.675743256754306], [-0.3599640035996359 3
+5.996400359964; -35.996400359964 -0.359964003599643])
 ```
 
 
@@ -234,8 +235,8 @@ l = round.(lambda,digits=2)
   -0.12 - 3.43im
   -0.12 + 3.43im
   -0.04 + 0.0im
+   -0.0 - 0.0im
    -0.0 + 0.0im
-    0.0 + 0.0im
     0.0 + 0.0im
 ```
 

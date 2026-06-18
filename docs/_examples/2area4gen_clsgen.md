@@ -1,16 +1,18 @@
 ---
-layout: post
-title:  "Multimachine Systems: Linear Model of Two-Area Four-Generator System (with classical model for generators)"
-date:   2024-09-06 08:54:44 +0200
-tag: linearmodel
+layout: example
+title: "Two-Area Four-Generator System (classical model)"
+summary: "The simplest multimachine linear model, using the classical synchronous machine model."
+project: https://github.com/CRESYM/WOLF-I/tree/main/projects/202505-Two-Area-Four-Gen-Linear-Model
+project_name: projects/202505-Two-Area-Four-Gen-Linear-Model
+generated: 2026-06-18
+commit: 7d2556a
 ---
 
-*This post follows the method proposed in ["Power System Stability and Control" by Prabha S. Kundur and Om P. Malik.](https://www.accessengineeringlibrary.com/content/book/9781260473544)*
-
+# Linear Model of Two-Area Four-Generator System. The simplest one. 
 
 **Description: This script implements the multimachine model of the two-area Kundur system with four generators using the classical model state-space representation for the synchronous machines.** This is the simplest model we can find for the two-area four-generator system, as it uses a synchronous machine model with only two state variables.
 
-The script solves the load flow problem based on the [PowerModels.jl](https://lanl-ansi.github.io/PowerModels.jl/stable/) package, constructs the linear models of the system and calculates the eigenvalues of the multimachine model. All the scripts and functions used in this example are available in the [SSSinJulia repository](https://github.com/Alejandra-CB/SSSinJulia/tree/main/scr): 
+The script solves the load flow problem based on the PowerModels.jl package, constructs the linear models of the system and calculates the eigenvalues of the multimachine model. All the scripts and functions used in this example are available in the [SSSinJulia repository](https://github.com/Alejandra-CB/SSSinJulia/tree/main/scr): 
 - ``bs_2area4gen.m``: Contains the static data of the network.
 - ``ssanalysis.jl``: Implements the functions to solve the load flow problem, create the expanded admittance matrix, and define the linear models of the generators and loads.
     - ``solvelf_pm``: Solves the load flow problem using the PowerModels.jl package.
@@ -23,12 +25,12 @@ The script solves the load flow problem based on the [PowerModels.jl](https://la
 
 The script is divided into several parts: loading the required packages, solving the load flow problem, defining the linear models of generators and loads, creating the expanded admittance matrix, constructing the global matrices of the two-area Kundur system, and calculating the eigenvalues of the multimachine model. The script provides the eigenvalues of the multimachine model as the final output.
 
-# Setup and Package Loading
+## Setup and Package Loading
 We start by loading the necessary packages and modules:
 ```julia
 using LinearAlgebra
 using BlockDiagonals
-include("sssanalysis.jl")
+include("src/linmodfun.jl")
 using .ssmatrix # Import the module ssmatrixclgen.
 using .ymatrix # Import the module ymatrix.
 using .solvelf # Import the module solvelf.
@@ -43,8 +45,10 @@ To calculate the load flow, we first needed to define the static data of the net
 The function `solvelf_pm` is used to solve the load flow problem with the `PowerModels.jl` package ([documentation](https://lanl-ansi.github.io/PowerModels.jl/stable/)).
 
 ```julia
-Sb, result, data = solvelf_pm("bs_2area4gen.m")
+Sb, result, data = solvelf_pm("data/bs_2area4gen.m")
 ```
+
+
 
 
 # Admittance matrix
@@ -226,14 +230,14 @@ l = round.(lambda,digits=2)
 
 ```
 8-element Vector{ComplexF64}:
- -0.0 - 7.21im
- -0.0 + 7.21im
-  0.0 - 3.41im
-  0.0 + 3.41im
-  0.0 - 0.0im
-  0.0 + 0.0im
-  0.0 - 7.4im
-  0.0 + 7.4im
+ 0.0 - 7.4im
+ 0.0 - 7.21im
+ 0.0 - 3.41im
+ 0.0 - 0.0im
+ 0.0 + 0.0im
+ 0.0 + 3.41im
+ 0.0 + 7.21im
+ 0.0 + 7.4im
 ```
 
 
