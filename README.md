@@ -1,12 +1,6 @@
 # Robustness Analysis via Symbolic Eigenvalue Sensitivities
 
-Symbolic small-signal stability analysis of a multi-machine power system. The
-code builds the closed-loop state-space model of a two-machine system
-(classical generator model), keeps a chosen physical parameter **symbolic**, and
-derives closed-form expressions for the system eigenvalues and their
-sensitivities. Sweeping the symbolic parameter then reveals how the
-inter-area mode igenvalue sensitivity moves — i.e. how *robust* the POD is to
-variation in that parameter.
+Symbolic small-signal stability analysis of a multi-machine power system. The code builds the closed-loop state-space model of a two-machine system (classical generator model), keeps a chosen physical parameter **symbolic**, and derives closed-form expressions for the system eigenvalues and their sensitivities. Sweeping the symbolic parameter then reveals how the inter-area mode igenvalue sensitivity moves — i.e. how *robust* the POD is to variation in that parameter.
 
 The symbolic engine is [Symbolics.jl](https://symbolics.juliasymbolics.org/);
 load flow uses [PowerModels.jl](https://lanl-ansi.github.io/PowerModels.jl/).

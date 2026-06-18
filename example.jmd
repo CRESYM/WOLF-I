@@ -1,10 +1,8 @@
-# What this example shows
-
 This repository performs **small-signal stability analysis** of a two-machine power system, but with a twist: instead of plugging in numbers and computing eigenvalues, it keeps **one physical parameter symbolic** and derives a *closed-form expression* for each system eigenvalue and for its **sensitivity**.
 
 Sweeping that symbolic parameter then answers a practical question:
 
-> *As the parameter drifts away from its nominal value, does the inter-area oscillation mode stay well-damped?* — i.e. **how robust is POD the design?**
+> As the parameter drifts away from its nominal value, does the inter-area oscillation mode stay well-damped? — i.e. **how robust is POD the design?**
 
 In this walkthrough we keep the **inertia ratio** `kH = H₂ / H₁` symbolic. We will:
 
