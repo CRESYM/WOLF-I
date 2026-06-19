@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Examples"
+description: "Reproducible, executable examples from the WOLF-I project: step-by-step multimachine linear models and eigenvalue computations, including Kundur's two-area four-generator system."
 permalink: /examples/
 ---
 

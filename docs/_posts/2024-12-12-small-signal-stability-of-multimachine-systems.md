@@ -2,6 +2,7 @@
 layout: post
 title:  "Generator represented by the detailed linear model"
 date:   2024-12-12 08:54:44 +0200
+description: "The detailed 1d-2q linear model of a synchronous generator in per-unit: a six-state representation capturing rotor and field dynamics for accurate multimachine small-signal stability analysis."
 tag: insights
 ---
 

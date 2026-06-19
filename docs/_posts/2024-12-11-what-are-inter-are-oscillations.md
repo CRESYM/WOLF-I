@@ -2,6 +2,7 @@
 layout: post
 title:  "What are inter-area oscillations and why are they important?"
 date:   2024-12-11 08:54:44 +0200
+description: "An introduction to inter-area oscillations in power systems: what they are, why they matter for grid stability, and the poorly damped East-Centre-West mode of the European continental grid."
 tag: insights
 ---
 

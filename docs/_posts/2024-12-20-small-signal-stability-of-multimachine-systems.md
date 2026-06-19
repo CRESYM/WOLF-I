@@ -2,6 +2,7 @@
 layout: post
 title:  "Two-area Four-generator Kundur system"
 date:   2024-12-20 08:54:44 +0200
+description: "Two reproducible, executable examples that build the multimachine linear model of Kundur's two-area, four-generator system and compute its eigenvalues, using the classical and detailed synchronous machine models."
 tag: insights
 ---
 

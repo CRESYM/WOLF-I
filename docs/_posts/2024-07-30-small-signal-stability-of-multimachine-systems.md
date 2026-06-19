@@ -2,6 +2,7 @@
 layout: post
 title:  "Multimachine Systems. Integrating Individual Dynamic Models into a Global Model."
 date:   2024-07-30 08:54:44 +0200
+description: "How to combine the linearized models of individual dynamic devices into a single global state-space model for small-signal stability analysis of multimachine power systems, following Kundur's method."
 tag: insights
 ---
 

@@ -15,17 +15,34 @@
 # in the templates via {{ site.myvariable }}.
 title: WOLF-I
 email: alejandra.cedenilla-bote@cresym.eu
-description: Wide-area Oscillations of Low Frequency in the presence of IBRs
+description: >-
+  WOLF-I (Wide-area Oscillations of Low Frequency in the presence of IBRs) is a
+  research project on the role of inverter-based resources (IBRs) in damping
+  inter-area oscillations in power systems, with reproducible code and a public
+  research diary.
 baseurl: "/WOLF-I" #the subpath of your site, e.g. /blog
-url: "https://cresym.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: 
+url: "https://cresym.github.io" # the base hostname & protocol for your site, e.g. http://example.com (no trailing slash)
 github_username:  Alejandra-CB
+lang: en
+
+# SEO metadata (used by jekyll-seo-tag)
+author: Alejandra Cedenilla-Bote
+logo: /assets/WOLFI.png
+
+# Apply a default social-preview image (og:image) to every page
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/WOLFI.png
 
 # Build settings
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Worked, executable examples (rendered from projects/<name>/ with Weave.jl).
 collections:

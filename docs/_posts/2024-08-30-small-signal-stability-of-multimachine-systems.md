@@ -2,6 +2,7 @@
 layout: post
 title:  "Linear model of static loads"
 date:   2024-08-30 08:54:44 +0200
+description: "Deriving the linear model of static loads in terms of real and imaginary voltage components, for inclusion in the small-signal stability analysis of multimachine power systems."
 tag: insights
 ---
 

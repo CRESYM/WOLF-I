@@ -2,6 +2,7 @@
 layout: post
 title:  "Generator represented by the classical linear model"
 date:   2024-09-02 08:54:44 +0200
+description: "The classical linear model of a synchronous generator in per-unit: a two-state representation used as the simplest building block for multimachine small-signal stability studies."
 tag: insights
 ---
 

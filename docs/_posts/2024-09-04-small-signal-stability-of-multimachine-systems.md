@@ -2,6 +2,7 @@
 layout: post
 title:  "Multimachine Systems: Reference frame transformation"
 date:   2024-09-04 08:54:44 +0200
+description: "Transforming each generator's individual dq reference frame into a common network reference frame, a key step in assembling a global multimachine linear model."
 tag: insights
 ---
 
